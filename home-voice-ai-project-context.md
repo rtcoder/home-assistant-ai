@@ -214,17 +214,45 @@ text → speech
 
 ## llm
 
-Interface to local LLM runtime.
+Interface to local or cloud LLM runtime.
 
 LLM runtime:
 
-Ollama lub OpenClaw (openclaw.ai)
+Ollama, OpenClaw (openclaw.ai) - WYŁĄCZNIE MODELE LOKALNE.
+**Uwaga:** Ollama jest zainstalowana bezpośrednio w kontenerze serwera, a modele są pre-instalowane podczas budowania obrazu.
+
+### Rekomendowane modele LLM dla języka polskiego (Lokalnie, do 40GB RAM)
+
+1.  **Qwen 2.5 32B Instruct** (Ollama: `qwen2.5:32b`) - **Nasz główny faworyt.**
+    -   **Rozmiar:** ~19GB (Q4) / ~34GB (Q8).
+    -   **Dlaczego:** Jeden z najmądrzejszych modeli w swojej klasie. Bardzo dobrze radzi sobie z językiem polskim, logiką i instrukcjami agenta. Świetny balans między szybkością a inteligencją.
+    -   **Użycie RAM:** ~20-35GB w zależności od kwantyzacji.
+    -   **Pobieranie:** `ollama run qwen2.5:32b`
+
+2.  **Bielik 11B v2.2** (Ollama: `bielik`) - **Najlepszy do "naturalności".**
+    -   **Rozmiar:** ~7GB (Q4) / ~12GB (Q8).
+    -   **Dlaczego:** Model trenowany specyficznie na polskich tekstach przez grupę SpeakLeash. Najlepiej "czuje" kontekst kulturowy i niuanse języka polskiego. Bardzo lekki dla RAM-u.
+    -   **Użycie RAM:** < 15GB.
+    -   **Pobieranie:** `ollama run bielik`
+
+3.  **Llama 3.1 70B Instruct** (Ollama: `llama3.1:70b-instruct-q3_K_M`) - **Największa moc.**
+    -   **Rozmiar:** ~34GB (Q3_K_M) / ~40GB (Q4_K_S).
+    -   **Dlaczego:** Jeśli potrzebujesz najbardziej zaawansowanego rozumowania. Wersja 70B w niskiej kwantyzacji wciąż bije mniejsze modele.
+    -   **Użycie RAM:** ~35-40GB. Uwaga: Może działać wolniej niż mniejsze modele.
+    -   **Pobieranie:** `ollama run llama3.1:70b-instruct-q3_K_M`
 
 LLM tasks:
 
 -   natural language understanding
 -   intent extraction
 -   generating conversational response
+
+### Wybór modelu (Dynamiczny kontekst)
+
+System wspiera wybór modelu w zależności od potrzeb:
+- **Bielik:** Szybkie odpowiedzi, codzienna konwersacja, niskie zużycie zasobów.
+- **Qwen 2.5:** Złożone zapytania, logika, sterowanie domem.
+- **Llama 70B:** Trudne zadania analityczne (wymaga dużej ilości RAM).
 
 ------------------------------------------------------------------------
 

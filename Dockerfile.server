@@ -4,6 +4,7 @@ FROM python:3.11-slim
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV OLLAMA_HOST=0.0.0.0
 
 # Set work directory
 WORKDIR /app
@@ -16,9 +17,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     gnupg \
     git \
+    procps \
     && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && npm install -g openclaw@latest \
+    && curl -fsSL https://ollama.com/install.sh | sh \
     && rm -rf /var/lib/apt/lists/*
 
 # Install python dependencies
@@ -27,6 +30,15 @@ RUN pip install --no-cache-dir -r requirements.txt || touch requirements.txt
 
 # Copy project files
 COPY server/ ./server/
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
+# Pull models during build (Warning: This will result in a very large image, ~60GB+)
+RUN (ollama serve &) && sleep 10 && \
+    ollama pull bielik && \
+    ollama pull qwen2.5:32b && \
+    ollama pull llama3.1:70b-instruct-q3_K_M && \
+    pkill -f ollama
 
 # Run the application
-CMD ["python", "server/main.py"]
+ENTRYPOINT ["./entrypoint.sh"]

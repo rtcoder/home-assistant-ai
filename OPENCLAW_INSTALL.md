@@ -38,7 +38,8 @@ Najprostszym sposobem instalacji jest użycie globalnego pakietu `npm` i kreator
    Flaga `--install-daemon` spowoduje, że asystent będzie działał w tle jako usługa systemowa (launchd na macOS lub systemd na Linux).
 
 3. Postępuj zgodnie z instrukcjami na ekranie, aby:
-   - Skonfigurować dostawców AI (OpenAI, Anthropic, modele lokalne przez Ollama).
+   - Skonfigurować dostawców AI:
+     - **Ollama:** Kluczowe dla modeli lokalnych (Bielik, Qwen, Llama). Upewnij się, że Ollama działa na tym samym hostie lub jest dostępna w sieci.
    - Sparować kanały komunikacji (np. zeskanować kod QR dla WhatsApp).
    - Wybrać umiejętności (skills).
 

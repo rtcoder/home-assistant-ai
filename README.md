@@ -31,6 +31,17 @@ W tym scenariuszu serwer z brokerem działają na jednej maszynie (np. serwerze 
 
 *Uwaga: Węzły głosowe wymagają dostępu do urządzeń audio (`/dev/snd`), co działa najlepiej na Linuxie.*
 
+## Pobieranie modeli LLM (Lokalnie)
+
+**Uwaga:** Od teraz obrazy Docker serwera są budowane z domyślnie pobranymi modelami. Jeśli jednak chcesz pobrać je ręcznie lub zaktualizować, wykonaj poniższe komendy wewnątrz kontenera lub na hoście (jeśli masz zainstalowaną Ollamę):
+
+```bash
+# Wykonanie bezpośrednio w kontenerze serwera:
+docker exec -it home-voice-ai-server ollama pull bielik
+docker exec -it home-voice-ai-server ollama pull qwen2.5:32b
+docker exec -it home-voice-ai-server ollama pull llama3.1:70b-instruct-q3_K_M
+```
+
 ## Struktura projektu
 
 - `server/` - Centralna jednostka przetwarzająca (STT, LLM, TTS).
