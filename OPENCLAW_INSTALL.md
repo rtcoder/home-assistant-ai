@@ -7,6 +7,21 @@ OpenClaw to nowoczesny, otwartoźródłowy asystent AI, którego możesz uruchom
 - Menedżer pakietów: `npm`, `pnpm` lub `bun`
 - System operacyjny: macOS, Linux lub Windows (przez WSL2)
 
+## Instalacja w Dockerze (Serwer)
+
+W naszym projekcie `Dockerfile.server` automatycznie instaluje OpenClaw. Jeśli używasz `docker-compose.yml`, wystarczy:
+
+1. **Uruchomienie serwera:**
+   ```bash
+   docker-compose up -d server
+   ```
+
+2. **Skonfigurowanie OpenClaw wewnątrz kontenera:**
+   ```bash
+   docker exec -it home-voice-ai-server openclaw onboard
+   ```
+   *Ważne: W kontenerze nie używaj flagi `--install-daemon`, po prostu skonfiguruj swoje kanały i AI.*
+
 ## Instalacja (Zalecana)
 
 Najprostszym sposobem instalacji jest użycie globalnego pakietu `npm` i kreatora konfiguracji.

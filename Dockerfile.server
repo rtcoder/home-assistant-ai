@@ -1,0 +1,32 @@
+# Dockerfile.server
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Set work directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libasound2-dev \
+    curl \
+    ca-certificates \
+    gnupg \
+    git \
+    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y --no-install-recommends nodejs \
+    && npm install -g openclaw@latest \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install python dependencies
+COPY server/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt || touch requirements.txt
+
+# Copy project files
+COPY server/ ./server/
+
+# Run the application
+CMD ["python", "server/main.py"]
