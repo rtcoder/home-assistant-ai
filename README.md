@@ -78,7 +78,7 @@ W tym scenariuszu serwer z brokerem działają na jednej maszynie (np. serwerze 
 
 ```bash
 # Wykonanie bezpośrednio w kontenerze serwera:
-docker exec -it home-voice-ai-server ollama pull bielik
+docker exec -it home-voice-ai-server ollama pull llama3.1:8b
 docker exec -it home-voice-ai-server ollama pull qwen2.5:32b
 docker exec -it home-voice-ai-server ollama pull llama3.1:70b-instruct-q3_K_M
 ```

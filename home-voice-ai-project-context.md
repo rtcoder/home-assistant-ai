@@ -229,11 +229,11 @@ Ollama, OpenClaw (openclaw.ai) - WYŁĄCZNIE MODELE LOKALNE.
     -   **Użycie RAM:** ~20-35GB w zależności od kwantyzacji.
     -   **Pobieranie:** `ollama run qwen2.5:32b`
 
-2.  **Bielik 11B v2.2** (Ollama: `bielik`) - **Najlepszy do "naturalności".**
-    -   **Rozmiar:** ~7GB (Q4) / ~12GB (Q8).
-    -   **Dlaczego:** Model trenowany specyficznie na polskich tekstach przez grupę SpeakLeash. Najlepiej "czuje" kontekst kulturowy i niuanse języka polskiego. Bardzo lekki dla RAM-u.
-    -   **Użycie RAM:** < 15GB.
-    -   **Pobieranie:** `ollama run bielik`
+2.  **Llama 3.1 8B Instruct** (Ollama: `llama3.1:8b`) - **Najlepszy do szybkich odpowiedzi.**
+    -   **Rozmiar:** ~4.7GB (Q4).
+    -   **Dlaczego:** Bardzo szybki, wspiera język polski, idealny do prostych zapytań i szybkich reakcji. Mało wymagający dla RAM-u.
+    -   **Użycie RAM:** < 8GB.
+    -   **Pobieranie:** `ollama run llama3.1:8b`
 
 3.  **Llama 3.1 70B Instruct** (Ollama: `llama3.1:70b-instruct-q3_K_M`) - **Największa moc.**
     -   **Rozmiar:** ~34GB (Q3_K_M) / ~40GB (Q4_K_S).
@@ -250,7 +250,7 @@ LLM tasks:
 ### Wybór modelu (Dynamiczny kontekst)
 
 System wspiera wybór modelu w zależności od potrzeb:
-- **Bielik:** Szybkie odpowiedzi, codzienna konwersacja, niskie zużycie zasobów.
+- **Llama 8B:** Szybkie odpowiedzi, codzienna konwersacja, niskie zużycie zasobów.
 - **Qwen 2.5:** Złożone zapytania, logika, sterowanie domem.
 - **Llama 70B:** Trudne zadania analityczne (wymaga dużej ilości RAM).
 

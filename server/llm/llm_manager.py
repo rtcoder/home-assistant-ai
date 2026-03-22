@@ -9,7 +9,7 @@ class LLMManager:
     """
     
     MODELS = {
-        "fast": "bielik",
+        "fast": "llama3.1:8b",
         "balanced": "qwen2.5:32b",
         "powerful": "llama3.1:70b-instruct-q3_K_M"
     }
