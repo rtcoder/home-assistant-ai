@@ -4,6 +4,34 @@ Lokalny, prywatny asystent głosowy wspierający język polski, działający w a
 
 ## Szybki start (Docker / Podman)
 
+Docker nie jest jedynym rozwiązaniem, ale zapewnia najszybszą izolację. Możesz zamiennie używać **Podman** (jeśli wolisz rootless) lub uruchamiać system bezpośrednio na hostingu (patrz: [Alternatywy dla Dockera](#alternatywy-dla-dockera)).
+
+1. **Na serwerze:**
+   ```bash
+   ./run.sh
+   ```
+2. **Na urządzeniu (node):**
+   ```bash
+   ./run-device.sh
+   ```
+
+*(Poniżej znajdziesz również instrukcje manualne oraz konfigurację autostartu).*
+
+### Instalacja jako usługa (Autostart)
+
+Jeśli chcesz, aby system uruchamiał się automatycznie po starcie systemu (Linux/systemd), użyj poniższych skryptów:
+
+1. **Na serwerze:**
+   ```bash
+   sudo ./setup-service.sh
+   ```
+2. **Na urządzeniu (node):**
+   ```bash
+   sudo ./setup-device-service.sh
+   ```
+
+Skrypty te utworzą usługi systemowe, które będą zarządzać kontenerami Docker w tle.
+
 ### Scenariusz A: Wszystko na jednej maszynie (Testowanie)
 
 1. **Uruchomienie serwera, brokera i testowego urządzenia:**
@@ -75,3 +103,16 @@ Projekt korzysta z:
 - **MQTT** (Mosquitto)
 - **Ollama / OpenClaw** (runtime LLM)
 - **Porcupine** (Wake word detection)
+
+## Alternatywy dla Dockera
+
+Jeśli nie chcesz używać Dockera, możesz zapewnić hermetyczność w następujący sposób:
+
+1. **Podman:** Bezpośredni zamiennik Dockera. Skrypty `run.sh` oraz `setup-service.sh` są z nim kompatybilne (wystarczy alias `docker=podman`).
+2. **Venv + Systemd:** Najlżejsza forma izolacji. 
+   - Izolacja bibliotek Pythona (`python -m venv venv`).
+   - Izolacja procesu i autostart przez `systemd` (patrz sekcja "Instalacja jako usługa").
+   - Wymaga ręcznej instalacji zależności systemowych (np. `portaudio`, `nodejs`, `ollama`).
+3. **Nix / NixOS:** Pozwala na pełną, deklaratywną izolację środowiska bez narzutu wirtualizacji (opcja dla zaawansowanych).
+
+**Werdykt:** Docker/Podman jest zalecany dla **Serwera**, ponieważ ułatwia zarządzanie ciężkimi zależnościami (Ollama, modele 40GB+). Dla **Urządzeń** (Raspberry Pi) często lepszym rozwiązaniem jest `venv`, aby uniknąć problemów z dostępem do sterowników dźwięku (`ALSA/PulseAudio`).
