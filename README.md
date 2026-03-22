@@ -15,6 +15,19 @@ Docker nie jest jedynym rozwiązaniem, ale zapewnia najszybszą izolację. Może
    ./run-device.sh
    ```
 
+### Aktualizacja systemu
+
+Aby pobrać najnowsze zmiany z repozytorium i zaktualizować kontenery:
+
+1. **Na serwerze:**
+   ```bash
+   ./update.sh
+   ```
+2. **Na urządzeniu (node):**
+   ```bash
+   ./update-device.sh
+   ```
+
 *(Poniżej znajdziesz również instrukcje manualne oraz konfigurację autostartu).*
 
 ### Instalacja jako usługa (Autostart)
